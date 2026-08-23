@@ -97,3 +97,16 @@ ise [docs/CODE_REVIEW.md](docs/CODE_REVIEW.md) dosyasındadır.
 API anahtarlarıyla ilgili kurallar [SECURITY.md](SECURITY.md) dosyasındadır. Her
 push ve pull request'te `.github/workflows/tests.yml` ile testler otomatik çalışır.
 
+## Tam dokümantasyon
+
+Yapılan bütün çalışmanın “nasıl, neden, hangi sorun ve hangi çözüm” ayrıntıları
+[Ana Teknik Rapor](docs/MASTER_REPORT_TR.md) içinde birleştirilmiştir. Mimari kararların
+gerekçeleri [Karar Günlüğü](docs/DECISION_LOG.md), testlerin koruduğu riskler
+[Test Matrisi](docs/TEST_MATRIX.md), sürüm değişiklikleri ise
+[CHANGELOG.md](CHANGELOG.md) dosyasındadır.
+
+Benzer açık kaynak/ticari araçlar, alınabilecek özellikler ve önceliklendirme
+[Ekosistem ve Özellik Raporu](docs/ECOSYSTEM_AND_FEATURES_REPORT_TR.md) içindedir.
+Ana bilgisayardaki uzantıya güvenli aktarım için veri sözleşmesi, performans, gizlilik
+ve kabul kriterleri [Genişletilmiş Devir Bağlamı](docs/CONTEXT_EXPANSION.md) dosyasındadır.
+
