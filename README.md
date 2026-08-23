@@ -78,3 +78,6 @@ Daha ayrıntılı bilgi için [docs/CONTEXT.md](docs/CONTEXT.md),
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ve
 [docs/INTEGRATION.md](docs/INTEGRATION.md) dosyalarına bakın.
 
+API anahtarlarıyla ilgili kurallar [SECURITY.md](SECURITY.md) dosyasındadır. Her
+push ve pull request'te `.github/workflows/tests.yml` ile testler otomatik çalışır.
+
