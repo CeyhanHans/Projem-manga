@@ -53,3 +53,29 @@ Ana bilgisayardaki extension gelmeden bu eşikleri “daha iyi görünmesi” i�
 rastgele değiştirmeyin. Her hata için gerçek OCR kelimelerini fixture olarak ekleyin,
 önce kırmızı test oluşturun, sonra algoritmayı düzeltin.
 
+---
+
+## OCR güçlendirme — aynı gün ikinci çalışma
+
+Resmî Tesseract, OpenCV ve Canvas kaynakları incelendi. Önceki kodun ana açığı,
+OCR'ın hiç görmediği balonu tespit edememesiydi.
+
+Eklenenler:
+
+- RGBA/alfa güvenli gri ton dönüşümü.
+- Yüzdelik kontrast germe.
+- Integral görüntü tabanlı Sauvola adaptif eşikleme.
+- Koyu ve açık yazı için doğru çift polarite.
+- 4/8 bağlı bileşen analizi ve harf geometrisi filtreleri.
+- OCR'dan bağımsız metin bölgesi adayları.
+- Büyük görüntüler için 2,5 MP analiz bütçesi.
+- OCR kalite puanı ve pahalı fallbackleri gereksizken durdurma.
+- Baseline/contrast/adaptive-dark/adaptive-light geçiş planı.
+- Aynı koordinattaki okumaları metin konsensüsüyle birleştirme.
+- Geçiş hatasında diğer sonuçlarla devam etme.
+
+İlk yeni test çalışmasında 21/23 başarı görüldü. Adayların okuma sırası hatası
+düzeltildi; konsensüs testi açıkça üç geçiş isteyecek şekilde netleştirildi.
+Morfoloji yardımcıları ve testi eklendi. Son durum 24/24 başarılı ve bütün
+kaynaklar sözdizimi kontrolünden geçti.
+

@@ -3,7 +3,16 @@
 ## Veri akışı
 
 ```text
-Tesseract / başka OCR
+Canvas ImageData
+        │
+        ▼
+kontrast + iki polarite Sauvola + connected components
+        │ OCR'dan bağımsız text candidates
+        ▼
+bölgesel crop planı
+        │
+        ▼
+Tesseract / başka OCR (adaptif çoklu geçiş)
         │ ham words: text + confidence + bbox
         ▼
 normalizeOcrWords
@@ -28,6 +37,10 @@ fitTextToBox + buildFontProfile
         ▼
 Ana extension render/overlay katmanı
 ```
+
+OCR geçişleri `baseline → contrast → adaptive-dark → adaptive-light` sırasındadır.
+Kalite yeterliyse erken durur; değilse sonuçlar koordinat ve metin konsensüsüyle
+birleştirilir.
 
 ## Önemli kararlar
 

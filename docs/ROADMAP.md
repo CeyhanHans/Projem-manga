@@ -13,6 +13,10 @@
 - [x] SVG tanılama katmanı
 - [x] Tesseract v5 adaptörü
 - [x] IoU tabanlı precision/recall/F1 değerlendirme aracı
+- [x] OCR'dan bağımsız iki polariteli piksel metin adayı algılama
+- [x] Sauvola adaptif eşikleme ve bağlı bileşen filtresi
+- [x] OCR kalite skoru ve erken durdurmalı çoklu geçiş
+- [x] Geçişler arası koordinat/metin konsensüsü
 - [x] Regression testleri ve örnek fixture
 
 ## Ana bilgisayarda ilk oturum
@@ -26,7 +30,7 @@
 
 ## İkinci aşama
 
-- [ ] Düşük güvenli bölgelerde adaptif yeniden OCR'ı etkinleştir
+- [ ] Hazır adaptif OCR katmanını gerçek Tesseract worker'a bağla
 - [ ] Canvas `measureText` ile gerçek font ölçümünü bağla
 - [ ] Çeviri önbelleği ve 429 retry/backoff ekle
 - [ ] OCR/çeviri/render sürelerini tanılama raporuna ekle
@@ -35,6 +39,8 @@
 ## Görsel kalitesi aşaması
 
 - [ ] Gerçek balon maskesi için connected-component prototipi
+- [ ] Eğik metin için deskew açısı tahmini
+- [ ] Dikey metin/SFX için ayrı aday sınıflandırması
 - [ ] Beyaz/siyah/renkli balonlar için ayrı test seti
 - [ ] Dikey metin ve SFX sınıflandırması
 - [ ] Orijinal yazıyı silme/inpainting katmanı

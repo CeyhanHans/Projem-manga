@@ -14,6 +14,9 @@ Ana amaçlar:
 5. Hataları görünür kılan SVG tanılama katmanı sağlamak.
 6. Mevcut Tesseract.js çıktısını eski extension'ın `{en, fr, confidence, bbox}`
    biçimine çevirmek.
+7. OCR hiçbir kelime üretmese bile piksellerden muhtemel metin bölgelerini bulmak.
+8. Kontrast ve iki polaritedeki OCR sonuçlarını birleştirip hatalı okumalar arasında
+   konsensüs oluşturmak.
 
 ## Neden ayrı bir destek kiti?
 
@@ -47,8 +50,15 @@ for (const region of analysis.regions) {
 
 | Modül | Görev |
 |---|---|
+| `src/image/text-candidate-detector.js` | OCR öncesi piksel tabanlı metin alanı bulma |
+| `src/image/adaptive-threshold.js` | Koyu/açık yazı için Sauvola adaptif eşikleme |
+| `src/image/connected-components.js` | Harf adayları için 4/8 bağlı bileşen analizi |
+| `src/image/morphology.js` | İnce/kalın/kopuk karakterler için dilation, erosion, open, close |
 | `src/ocr/region-detector.js` | Kelime → satır → konuşma bölgesi gruplama |
 | `src/ocr/preprocess-plan.js` | Bölgeye özel adaptif OCR planı |
+| `src/ocr/ensemble.js` | Kaliteye göre duran/devam eden çoklu OCR orkestrasyonu |
+| `src/ocr/multi-pass-merge.js` | Farklı OCR okumalarını koordinat ve metin oyuyla birleştirme |
+| `src/ocr/quality.js` | Güven, gürültü ve içerik tabanlı OCR kalite puanı |
 | `src/layout/text-fit.js` | Çeviriyi balona sığdırma |
 | `src/layout/font-profile.js` | Diyaloğa göre font ağırlığı/renk/stroke önerisi |
 | `src/pipeline/analyze-page.js` | Tüm çıktıları tek veri sözleşmesinde birleştirme |
@@ -64,10 +74,13 @@ Harici paket gerekmez:
 npm test
 ```
 
+Mevcut otomatik test sonucu: **24/24 başarılı**.
+
 ## Sınırlar
 
 - Bu sürüm konuşma balonunun dış çizgisini piksel seviyesinde segmentlemez;
-  OCR kelime kutularından güvenli bir `balloonBox` tahmin eder.
+  OCR kelime kutularından veya piksel metin adaylarından güvenli bir `balloonBox`
+  tahmin eder.
 - Gerçek font ölçümü için extension entegrasyonunda Canvas `measureText` fonksiyonu
   `fitTextToBox` içine verilmelidir. Paketteki ölçüm tarayıcı olmadan test edilebilen
   yaklaşık ölçümdür.
@@ -77,6 +90,9 @@ npm test
 Daha ayrıntılı bilgi için [docs/CONTEXT.md](docs/CONTEXT.md),
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ve
 [docs/INTEGRATION.md](docs/INTEGRATION.md) dosyalarına bakın.
+
+OCR araştırma kararları [docs/OCR_RESEARCH.md](docs/OCR_RESEARCH.md), kod incelemesi
+ise [docs/CODE_REVIEW.md](docs/CODE_REVIEW.md) dosyasındadır.
 
 API anahtarlarıyla ilgili kurallar [SECURITY.md](SECURITY.md) dosyasındadır. Her
 push ve pull request'te `.github/workflows/tests.yml` ile testler otomatik çalışır.

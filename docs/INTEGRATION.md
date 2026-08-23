@@ -33,12 +33,46 @@ console.table(supportResult.regions.map(region => ({
 })));
 ```
 
+OCR'ın hiçbir şey bulamadığı sayfalarda aynı görüntünün `ImageData` verisini yeni
+ön dedektöre ver:
+
+```js
+import { detectTextCandidates } from './support/index.js';
+
+const imageData = canvasContext.getImageData(0, 0, canvas.width, canvas.height);
+const candidateResult = detectTextCandidates(imageData, {
+  readingDirection: 'rtl',
+});
+
+// candidate.balloonBox alanları mevcut crop/OCR fonksiyonuna gönderilecek.
+console.table(candidateResult.candidates);
+```
+
 ### Aşama 2 — Bölgesel yeniden OCR
 
 Yalnızca `confidence < 72` olan bölgelerde `ocrPlan.crop` alanını orijinal
 görüntüden kırp. `ocrPlan.upscale`, `pageSegmentationMode` ve `polarities`
 değerlerini mevcut Tesseract fonksiyonuna aktar. İyileşen sonuç eski sonuçla
 değiştirilsin; kötüleşirse eski sonuç korunsun.
+
+Mevcut Tesseract çağrısı bir adaptör fonksiyonuna sarıldığında çoklu geçiş motoru
+şöyle bağlanabilir:
+
+```js
+import { runAdaptiveOcr } from './support/index.js';
+
+const ensemble = await runAdaptiveOcr(async (source, plan) => {
+  const preparedImage = await applyPreprocessing(source, plan.preprocessing);
+  await worker.setParameters(plan.parameters);
+  return worker.recognize(preparedImage);
+}, croppedImage, {
+  imageWidth: crop.width,
+  imageHeight: crop.height,
+});
+
+// ensemble.words: konsensüs sonucu
+// ensemble.attempts: süre, kalite ve hata tanılaması
+```
 
 ### Aşama 3 — DeepL çevirisi
 

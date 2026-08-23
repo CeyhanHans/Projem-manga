@@ -1,6 +1,6 @@
 {
   "name": "projem-manga-support-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Manga ceviri eklentisi icin OCR bolge algilama, balon geometrisi ve metin yerlestirme cekirdegi",

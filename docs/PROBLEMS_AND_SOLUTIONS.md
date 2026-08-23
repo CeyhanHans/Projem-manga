@@ -56,3 +56,25 @@ sorunlu olduğu kaydedilebilir.
 hesabın repository API'si üzerinden kaydedilecek şekilde süreç ayrıldı. Bu sorun
 proje koduyla ilgili değildir.
 
+## 9. OCR'ın tamamen kaçırdığı balon işlenemiyordu
+
+**Neden:** Bölge gruplama yalnızca OCR kelime kutularından başlıyordu; sıfır kelime
+üreten alan için veri yoktu.
+
+**Çözüm:** Görsel piksellerinden bağımsız metin adayları çıkaran çift polariteli
+Sauvola + connected components hattı eklendi. Bu adaylar OCR kırpma alanı olarak
+kullanılabilir.
+
+## 10. Tek OCR geçişi hatalı karakteri kesin sonuç sayabiliyordu
+
+**Örnek:** Bir geçiş `STAYS`, iki geçiş `STATS` okuyabilir.
+
+**Çözüm:** Aynı konumdaki farklı geçişler kümeleniyor; metin konsensüsü ve güven
+puanı birlikte değerlendiriliyor. Alternatif okumalar tanılama verisinde korunuyor.
+
+## 11. Her görselde bütün OCR geçişleri gereksiz derecede pahalıydı
+
+**Çözüm:** Kelime güveni, karakter miktarı ve gürültü oranından kalite puanı
+hesaplanıyor. İlk geçiş yeterliyse sistem duruyor; yalnızca zayıf sonuçlarda daha
+pahalı kontrast ve adaptif eşik geçişlerine devam ediyor.
+
