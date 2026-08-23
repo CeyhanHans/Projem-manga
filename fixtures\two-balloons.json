@@ -1,0 +1,14 @@
+{
+  "imageWidth": 1000,
+  "imageHeight": 700,
+  "words": [
+    { "text": "WHERE", "confidence": 91, "bbox": { "x0": 100, "y0": 100, "x1": 170, "y1": 126 } },
+    { "text": "ARE", "confidence": 88, "bbox": { "x0": 178, "y0": 101, "x1": 220, "y1": 126 } },
+    { "text": "YOU?", "confidence": 93, "bbox": { "x0": 135, "y0": 136, "x1": 195, "y1": 163 } },
+    { "text": "I", "confidence": 82, "bbox": { "x0": 510, "y0": 102, "x1": 520, "y1": 128 } },
+    { "text": "DON'T", "confidence": 89, "bbox": { "x0": 529, "y0": 102, "x1": 595, "y1": 128 } },
+    { "text": "KNOW", "confidence": 90, "bbox": { "x0": 604, "y0": 102, "x1": 674, "y1": 128 } },
+    { "text": "YET", "confidence": 86, "bbox": { "x0": 557, "y0": 139, "x1": 604, "y1": 166 } }
+  ]
+}
+

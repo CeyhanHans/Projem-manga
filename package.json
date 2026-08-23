@@ -1,0 +1,15 @@
+{
+  "name": "projem-manga-support-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Manga ceviri eklentisi icin OCR bolge algilama, balon geometrisi ve metin yerlestirme cekirdegi",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/ocr/region-detector.js && node --check src/layout/text-fit.js && node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
